@@ -1,0 +1,44 @@
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  background-color: #F1F1F1;
+  scroll-behavior: smooth;
+}
+
+html::-webkit-scrollbar {
+  background-color: #FF8181;
+  width: 10px;
+}
+
+html::-webkit-scrollbar-thumb {
+  background-color: #D31C5C;
+  border-radius: 50px;
+  width: 10px;
+}
+
+html::-webkit-scrollbar-thumb:hover {
+  background-color: #2a2a2a;
+}
+
+li {
+  list-style-type: none !important;
+}
+
+.navbar {
+  position: fixed -webkit-sticky;
+  position: fixed sticky;
+  display: block;
+  overflow: visible;
+  width: 100px;
+  height: 100vh;
+  left: 0px;
+  top: 0px;
+  background-color: #2A2A2A;
+  border-radius: 0px 64px 42px 0px;
+}
+/*# sourceMappingURL=main.css.map */
