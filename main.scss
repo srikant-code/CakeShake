@@ -14,17 +14,17 @@ $transition3: "0.3s !important";
 @mixin transition($n) {
   transition-duration: $n !important;
 }
-@mixin neo-pressed-light(){
-    box-shadow:inset 4px 4px 6px rgb(221, 221, 221),  3px 3px 2px white;
+@mixin neo-pressed-light($depth: 1){
+    box-shadow:inset 4px*$depth 4px*$depth 6px*$depth rgb(221, 221, 221),  3px*$depth 3px*$depth 2px*$depth white;
 }
-@mixin neo-unpressed-light(){
-    box-shadow: 5px 5px 8px rgb(202, 202, 202), -5px -5px 8px white;
+@mixin neo-unpressed-light($elevation: 1){
+    box-shadow: 5px*$elevation 5px*$elevation 8px*$elevation rgb(202, 202, 202), -5px*$elevation -5px*$elevation 8px*$elevation white;
 }
-@mixin neo-pressed-dark(){
-    box-shadow:inset 4px 4px 6px rgb(0, 0, 0),  3px 3px 2px rgb(70, 70, 70);
+@mixin neo-pressed-dark($depth: 1){
+    box-shadow:inset 4px*$depth 4px*$depth 6px*$depth rgb(0, 0, 0),  3px*$depth 3px*$depth 2px*$depth rgb(70, 70, 70);
 }
-@mixin neo-unpressed-dark(){
-    box-shadow: 5px 5px 8px rgb(0, 0, 0), -5px -5px 8px rgb(70, 70, 70);
+@mixin neo-unpressed-dark($elevation: 1){
+    box-shadow: 5px*$elevation 5px*$elevation 8px*$elevation rgb(0, 0, 0), -5px*$elevation -5px*$elevation 8px*$elevation rgb(70, 70, 70);
 }
 @mixin flex($horientation: center, $vorientation: center, $third: center){
     display: flex;
@@ -33,9 +33,18 @@ $transition3: "0.3s !important";
     align-content: $third;
     flex-flow: row wrap;
 }
-@mixin dim($width: 100px, $height: 0px) {
+@mixin dim($width: 100px, $height: 0px, $minwidth: 0px, $minheight: 0px) {
     width:$width;
     height:$height;
+    min-width: $minwidth;
+    min-height: $minheight;
+}
+@mixin pinkGradient {
+    background: rgb(211,28,92);
+    background: -moz-linear-gradient(90deg, rgba(211,28,92,1) 0%, rgba(255,129,129,1) 100%);
+    background: -webkit-linear-gradient(90deg, rgba(211,28,92,1) 0%, rgba(255,129,129,1) 100%);
+    background: linear-gradient(90deg, rgba(211,28,92,1) 0%, rgba(255,129,129,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#d31c5c",endColorstr="#ff8181",GradientType=1);
 }
 
 //Fonts
@@ -57,39 +66,47 @@ body,html {
   scroll-behavior: smooth;
   overflow-x: hidden;
 }
-html::-webkit-scrollbar {
+body{
+    overflow-y: hidden;
+}
+*::-webkit-scrollbar {
   background-color: $lightPink;
   width: 10px;
 }
-html::-webkit-scrollbar-thumb {
+*::-webkit-scrollbar-thumb {
   background-color: $darkPink;
   border-radius: 50px;
   width: 10px;
 }
-html::-webkit-scrollbar-thumb:hover {
+*::-webkit-scrollbar-thumb:hover {
   background-color: $black;
+}
+::selection{
+    background: $lightPink;
+    color: white;
 }
 
 li {
   list-style-type: none !important ;
 }
 .navbar {
+  @include dim($navWidth, 100vh);
   position: fixed;
   display: block;
   overflow: visible;
-  @include dim($navWidth, 100vh);
   left: 0px;
   top: 0px;
+  z-index: 100;
   background-color: $black;
   border-radius: 0px 58px 0px 0px;
 
   .logo {
-    margin-top: 30px;
-    text-align: center;
     @include dim(90%, 90px);
-    border-radius: 50%;
     @include neo-unpressed-dark();
     @include flex(center, center, center);
+    margin-top: 30px;
+    text-align: center;
+    border-radius: 50%;
     cursor: pointer;
     svg {
       width: 72px;
@@ -102,6 +119,7 @@ li {
     justify-content: center;
     align-items: center;
     .navItem {
+      @include transition(0.3s);
       justify-content: space-between;
       cursor: pointer;
       border-radius: 50%;
@@ -113,7 +131,6 @@ li {
       justify-content: center;
       align-items: center;
       //transition-duration: $transition3;
-      @include transition(0.3s);
       &:hover {
         @include neo-pressed-dark();
         @include transition(0.3s);
@@ -134,6 +151,7 @@ li {
 
 .addButton {
     @include dim(110px, 110px);
+    z-index: 100;
 }
 
 .neo-circleContainer{
@@ -160,11 +178,12 @@ li {
 
 .userDetails{
     @include flex(flex-end, center ,center);
+    @include dim(fit-content,100px);
     position: fixed;
+    z-index: 100;
     //border: solid;
     right: 40px;
     top:40px;
-    @include dim(fit-content,100px);
     cursor: pointer;
     .username{
         font-size: 2.2rem;
@@ -172,24 +191,29 @@ li {
         margin-right: 15px;
     }
     .userIcon{
-        //border: solid;
+        border: solid transparent;
         border-radius: 50%;
         background-color: #fff;
         margin-right: 15px;
-        @include dim(fit-content,fit-content);
+        @include dim(fit-content,62px);
+        svg{
+            padding: 2px;
+        }
     }
 }
 
 #section-1{
-    @include dim(100vw, 100vh);
+    @include dim(100%, 100%, 100vw, 100vh);
     @include flex(flex-end,center ,center);
+    overflow-y: hidden !important;
     //border:solid blue;
 
     .section1Flex{
         @include flex(space-between,center ,center);
         //border: solid red;
-        @include dim(90vw, 100vh)
+        @include dim(90vw, 100vh);
         margin-left:80px;
+        overflow: hidden !important;
 
         .cakeshakeText{
             //border: solid;
@@ -233,27 +257,118 @@ li {
 }
 
 #section-2{
-    @include dim(100vw, 100vh);
+    @include dim(100%, 100%, 100vw, 100vh);
     @include flex(center,center ,center);
 
     .section2Heading{
-
+        @include font($grey, 3rem, bolder);
     }
     .section2Cards{
+        @include dim(80%, 50%);
 
         .whyCakeShake{
+            @include flex(center, center, center);
+            margin:40px;
 
             .whyCakeShakeItems{
+                @include dim(320px, 170px);
+                @include neo-unpressed-light();
+                @include flex(center, center, center);
+                @include transition(0.3s);
+                flex-flow: column wrap;
+                margin: 20px;
+                border-radius: 15px;
 
+                &:hover{
+                   transform: scale(1.05);
+                   @include transition(0.3s);
+                   @include neo-unpressed-light(2);
+                }
                 .whyCakeShakeItemImage{
-
+                    
                 }
                 .whyCakeShakeItemText{
-
+                    @include font($lightPink, 2rem, bold);
+                    text-align: center;
                 }
             }
         }
     }
+}
+
+#section-3{
+    @include dim(100vw, 120vh, 100%, 100%);
+    @include flex(center, center ,center);
+    flex-flow: row wrap;
+    background-color: $darkPink;
+    position: relative;
+    // border: solid;
+
+    .whatWeProvideContentDiv{
+        @include flex(center, center ,center);
+        @include dim(50%, 80%, 300px, auto);
+        flex-flow: column wrap;
+        transform: translateX(-150px);
+        margin-top: 000px;
+        // border: solid;
+
+        .whatWeProvideHeading{
+            @include dim(100%, fit-content, 50%, auto);
+            @include flex(flex-start, center, center);
+            padding: 10px;
+            //border: solid;
+            .whatWeProvideHeadingText{
+                @include font(white, 4rem, 900);
+                @include dim(fit-content, fit-content, 300px, auto);
+                text-align: center;
+                // border: solid;
+            }
+            .whatWeProvideHeadingImage{
+                @include dim(fit-content, fit-content, 0, auto);
+                text-align: center;
+                transform: translateX(20px);
+                // border: solid;
+            }
+        }
+        .whatWeProvideContent{
+            @include dim(100%, 30%, 200px, auto);
+            @include font(white, 1.5rem, 400);
+            line-height: 2.5rem;
+            padding: 20px;
+            padding-top: 40px;
+            // border: solid;
+        }
+    }
+    .whatWeProvideImage{
+        position: absolute;
+        right: -400px;
+        top:-400px;
+        transform: scale(0.9);
+        @include transition(0.3s);
+        //border: solid;
+        svg:hover{
+            transform: scale(1.01) translateX(20px) translateY(-40px);
+            @include transition(0.3s);
+        }
+    }
+}
+
+#section-4{
+    @include dim(100%, 100%, 100vw, 100vh);
+    @include flex(center,center ,center);
+
+}
+
+#section-5{
+    @include dim(100%, 100%, 100vw, 100vh);
+    @include flex(center,center ,center);
+
+}
+
+#section-6{
+    @include dim(100%, 100%, 100vw, 100vh);
+    @include flex(center,center ,center);
+
 }
 
 //Expand Transition
