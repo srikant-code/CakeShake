@@ -1,48 +1,351 @@
-*{
-    margin:0;
-    padding: 0;
-    box-sizing: border-box;
+// Variable declarartion
+// Colours
+$darkPink: #d31c5c;
+$lightPink: #ff8181;
+$backgroundTheme: #f1f1f1;
+$black: #2a2a2a;
+$grey: #707070;
+
+//Other Variables
+$navWidth: 100px;
+$transition3: "0.3s !important";
+
+//@mixins declarations
+@mixin transition($n) {
+  transition-duration: $n !important;
 }
-body{
-    background-color: #F1F1F1;
-    scroll-behavior: smooth;
+@mixin neo-pressed-light(){
+    box-shadow:inset 4px 4px 6px rgb(221, 221, 221),  3px 3px 2px white;
 }
-html::-webkit-scrollbar{
-    background-color: #FF8181;
-    width: 10px;
+@mixin neo-unpressed-light(){
+    box-shadow: 5px 5px 8px rgb(202, 202, 202), -5px -5px 8px white;
 }
-html::-webkit-scrollbar-thumb{
-    background-color: #D31C5C;
-    border-radius: 50px;
-    width: 10px;
+@mixin neo-pressed-dark(){
+    box-shadow:inset 4px 4px 6px rgb(0, 0, 0),  3px 3px 2px rgb(70, 70, 70);
 }
-html::-webkit-scrollbar-thumb:hover{
-    background-color: #2a2a2a;
+@mixin neo-unpressed-dark(){
+    box-shadow: 5px 5px 8px rgb(0, 0, 0), -5px -5px 8px rgb(70, 70, 70);
+}
+@mixin flex($horientation: center, $vorientation: center, $third: center){
+    display: flex;
+    justify-content: $horientation;
+    align-items: $vorientation;
+    align-content: $third;
+    flex-flow: row wrap;
+}
+@mixin dim($width: 100px, $height: 0px) {
+    width:$width;
+    height:$height;
 }
 
-li{
-    list-style-type: none !important ;
+//Fonts
+@import url("https://fonts.googleapis.com/css?family=Open+Sans&display=swap");
+@mixin font ($color: #000, $size:1.2rem, $weight: 600){
+    color: $color;
+    font-size: $size;
+    font-weight: $weight;
 }
-.navbar{
-    position: fixed sticky;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Open Sans", sans-serif;
+}
+body,html {
+  background-color: $backgroundTheme;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+html::-webkit-scrollbar {
+  background-color: $lightPink;
+  width: 10px;
+}
+html::-webkit-scrollbar-thumb {
+  background-color: $darkPink;
+  border-radius: 50px;
+  width: 10px;
+}
+html::-webkit-scrollbar-thumb:hover {
+  background-color: $black;
+}
+
+li {
+  list-style-type: none !important ;
+}
+.navbar {
+  position: fixed;
+  display: block;
+  overflow: visible;
+  @include dim($navWidth, 100vh);
+  left: 0px;
+  top: 0px;
+  background-color: $black;
+  border-radius: 0px 58px 0px 0px;
+
+  .logo {
+    margin-top: 30px;
+    text-align: center;
+    @include dim(90%, 90px);
+    border-radius: 50%;
+    @include neo-unpressed-dark();
+    @include flex(center, center, center);
+    cursor: pointer;
+    svg {
+      width: 72px;
+      height: 72px;
+    }
+  }
+  .navElementsUL {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    .navItem {
+      justify-content: space-between;
+      cursor: pointer;
+      border-radius: 50%;
+      text-align: center;
+      width: 80%;
+      height: $navWidth * 0.8;
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      //transition-duration: $transition3;
+      @include transition(0.3s);
+      &:hover {
+        @include neo-pressed-dark();
+        @include transition(0.3s);
+      }
+      &:first-child {
+        margin-top: 40px;
+      }
+      svg {
+        width: 30px;
+        height: 30px;
+      }
+    }
+  }
+  .activeNav{
+      @include neo-unpressed-dark();
+  }
+} //navbar Ends
+
+.addButton {
+    @include dim(110px, 110px);
+}
+
+.neo-circleContainer{
     display: block;
-    overflow: visible;
-    width: 100px;
-    height: 100vh;
-    left: 0px;
-    top: 0px;
-    background-color: #2A2A2A;
-    border-radius: 0px 64px 42px 0px;
-    .navElements{
-        
-        .navElements{
+    position: fixed;
+    right: 30px;
+    bottom: 30px;
+    .neo-circle{
+        background-color: $backgroundTheme;
+        @include dim(100%, 100%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        text-align: center;
+        border-radius: 50%;
+        @include neo-unpressed-light();
+        &:hover{
+            @include neo-pressed-light();
+            @include transition(0.5s);
+        }
+    }
+}
 
-            .navElementsUL{
+.userDetails{
+    @include flex(flex-end, center ,center);
+    position: fixed;
+    //border: solid;
+    right: 40px;
+    top:40px;
+    @include dim(fit-content,100px);
+    cursor: pointer;
+    .username{
+        font-size: 2.2rem;
+        color: $grey;
+        margin-right: 15px;
+    }
+    .userIcon{
+        //border: solid;
+        border-radius: 50%;
+        background-color: #fff;
+        margin-right: 15px;
+        @include dim(fit-content,fit-content);
+    }
+}
 
-                .navItem{
-                    
+#section-1{
+    @include dim(100vw, 100vh);
+    @include flex(flex-end,center ,center);
+    //border:solid blue;
+
+    .section1Flex{
+        @include flex(space-between,center ,center);
+        //border: solid red;
+        @include dim(90vw, 100vh)
+        margin-left:80px;
+
+        .cakeshakeText{
+            //border: solid;
+            @include dim(fit-content, 250px);
+            margin-right: 100px;
+
+                .cakeshakeImage{
+                    float: right;
+                    display: block;
+                }
+                .bysoni{
+                    display: block;
+                    margin-right: 15px;
+                    @include font($grey, 3.4rem, bolder);
+                    clear: both;
+                    float: right;
+                }
+        }
+
+        .homeImageCarousel{
+
+            //border: solid;
+            @include dim(500px, 500px);
+            text-align: center;
+            display: flex;
+            position: relative;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+    .hintText{
+        display: block;
+        position: absolute;
+        font-size: 2rem;
+        font-weight: 900;
+        bottom:70px;
+        left:200px;
+        //color: $grey;
+        @include font($grey ,2rem ,900);
+    }
+}
+
+#section-2{
+    @include dim(100vw, 100vh);
+    @include flex(center,center ,center);
+
+    .section2Heading{
+
+    }
+    .section2Cards{
+
+        .whyCakeShake{
+
+            .whyCakeShakeItems{
+
+                .whyCakeShakeItemImage{
+
+                }
+                .whyCakeShakeItemText{
+
                 }
             }
         }
     }
 }
+
+//Expand Transition
+.expand {
+  background-color: #fff;
+  @include dim(1px,1px);
+  display: block;
+  border-radius: 50%;
+  translate: 100px;
+  opacity: 0.3;
+  @include transition(0.3s);
+}
+.expand:hover .expand {
+  transform: scale(85);
+  @include transition(0.3s);
+}
+
+//Tooltip css
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  max-width: 120px;
+  width: 100%;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  top: -5px;
+  left: 120%;
+  margin-top: 30px;
+
+  height: 40px;
+  vertical-align: center;
+  padding-top: 10px;
+  font-size: 1.2rem;
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 100%;
+  margin-top: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent black transparent transparent;
+}
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+///////////Fading Animations
+.tooltip .tooltiptext {
+  opacity: 0;
+  transition: opacity 1s;
+}
+
+.tooltip:hover .tooltiptext {
+  opacity: 1;
+}
+
+////////////////////////////////
+// @mixin tooltipAfter {
+//     content: "";
+//     position: absolute;
+//     margin-top: -5px;
+//     border-width: 10px;
+//     border-style: solid;
+// }
+
+// .tooltiptextRight::after{
+//     @include tooltipAfter();
+//     top: 50% !important;
+//     right: 100%; /* To the left of the tooltip */
+//     border-color: transparent black transparent transparent;
+// }
+
+// .tooltiptextRight
+// .tooltiptextTop{
+//     @extend .tooltiptext;
+// }
+// .tooltiptextTop::after{
+//     @include tooltipAfter();
+//     top: 107% !important; /* At the bottom of the tooltip */
+//     left: 47%;
+//     border-color:black transparent transparent transparent;
+// }
