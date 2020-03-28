@@ -46,9 +46,39 @@ $transition3: "0.3s !important";
     background: linear-gradient(90deg, rgba(211,28,92,1) 0%, rgba(255,129,129,1) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#d31c5c",endColorstr="#ff8181",GradientType=1);
 }
+@mixin headingText($minw: fit-content, $color: white){
+    @include font($color, 4rem, 700);
+    @include dim(fit-content, fit-content, $minw, auto);
+    text-align: center;
+    letter-spacing: -1px;
+}
+@mixin paragraphText($color: black, $fontsize: 1.5rem, $lineHeight: 2.5rem) {
+    @include font($color, $fontsize, 400);
+    line-height: $lineHeight;
+}
+@mixin roundedButtonLight {
+    @include neo-unpressed-light();
+    background-color: $backgroundTheme;
+    border: none;
+    padding: 15px;
+    margin-left: 0px !important;
+    margin:30px;
+    width:230px;
+    border-radius: 50px;
+    cursor: pointer;
+    @include transition(0.3s);
+    @include font($grey, 2rem, 900);
+    &:hover{
+        @include neo-pressed-light(2);
+        //background-color: $darkPink;
+        color: $darkPink;
+        //transform: scale(1.1);
+        @include transition(0.3s);
+    }
+}
 
 //Fonts
-@import url("https://fonts.googleapis.com/css?family=Open+Sans&display=swap");
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap');
 @mixin font ($color: #000, $size:1.2rem, $weight: 600){
     color: $color;
     font-size: $size;
@@ -88,6 +118,11 @@ body{
 
 li {
   list-style-type: none !important ;
+}
+a{
+    text-decoration: none;
+    color: black;
+    font-size: 1rem;
 }
 .navbar {
   @include dim($navWidth, 100vh);
@@ -227,7 +262,7 @@ li {
                 .bysoni{
                     display: block;
                     margin-right: 15px;
-                    @include font($grey, 3.4rem, bolder);
+                    @include font($grey, 3.4rem, 600);
                     clear: both;
                     float: right;
                 }
@@ -242,6 +277,9 @@ li {
             position: relative;
             align-items: center;
             justify-content: center;
+            img{
+                @include dim(350px, 350px, 0, 0);
+            }
         }
     }
     .hintText{
@@ -252,7 +290,7 @@ li {
         bottom:70px;
         left:200px;
         //color: $grey;
-        @include font($grey ,2rem ,900);
+        @include font($grey ,2rem ,600);
     }
 }
 
@@ -261,7 +299,7 @@ li {
     @include flex(center,center ,center);
 
     .section2Heading{
-        @include font($grey, 3rem, bolder);
+        @include font($grey, 3rem, 700);
     }
     .section2Cards{
         @include dim(80%, 50%);
@@ -288,7 +326,7 @@ li {
                     
                 }
                 .whyCakeShakeItemText{
-                    @include font($lightPink, 2rem, bold);
+                    @include font($lightPink, 2rem, 600);
                     text-align: center;
                 }
             }
@@ -300,7 +338,8 @@ li {
     @include dim(100vw, 120vh, 100%, 100%);
     @include flex(center, center ,center);
     flex-flow: row wrap;
-    background-color: $darkPink;
+    @include pinkGradient();
+    // background-color: $darkPink;
     position: relative;
     // border: solid;
 
@@ -318,22 +357,19 @@ li {
             padding: 10px;
             //border: solid;
             .whatWeProvideHeadingText{
-                @include font(white, 4rem, 900);
-                @include dim(fit-content, fit-content, 300px, auto);
-                text-align: center;
+                @include headingText();
                 // border: solid;
             }
             .whatWeProvideHeadingImage{
                 @include dim(fit-content, fit-content, 0, auto);
                 text-align: center;
-                transform: translateX(20px);
+                transform: scale(0.7);
                 // border: solid;
             }
         }
         .whatWeProvideContent{
             @include dim(100%, 30%, 200px, auto);
-            @include font(white, 1.5rem, 400);
-            line-height: 2.5rem;
+            @include paragraphText(white);
             padding: 20px;
             padding-top: 40px;
             // border: solid;
@@ -354,21 +390,317 @@ li {
 }
 
 #section-4{
-    @include dim(100%, 100%, 100vw, 100vh);
+    @include dim(100%, 100%, 100vw, 150vh);
     @include flex(center,center ,center);
-
+    background-color: $black;
+    border: solid;
+    .pastOrdersHeading{
+        @include headingText(fit-content, $lightPink);
+        //border: solid;
+        padding: 40px;
+        margin: 40px;
+        margin-top: 0;
+    }
+    .pastOrdersCarousel{
+        @include flex(center, center, center);
+        .pastOrderPage-1{
+            @include dim(70%, 70%, auto, auto);
+            @include flex(center, center, center);
+            .pastOrderImage{
+                @include dim(fit-content , fit-content, 0, auto);
+                @include neo-unpressed-dark();
+                @include transition(0.3s);
+                padding: 50px;
+                margin: 10px;
+                border-radius: 5px;
+                background-color: $black;
+                //border: solid;
+                &:hover{
+                    transform: scale(1.6);
+                    @include neo-unpressed-dark(1.6);
+                    @include transition(0.3s);
+                }
+                >svg{
+                    fill: white !important;
+                }
+            }
+        }
+    }
 }
 
 #section-5{
-    @include dim(100%, 100%, 100vw, 100vh);
+    @include dim(100%, 100%, 100vw, 130vh);
     @include flex(center,center ,center);
 
-}
+    .whatOthersSayDiv{
+        @include flex();
+        flex-flow: column wrap;
+        .wOSHeading{
+            @include headingText(fit-content, $grey);
+            padding: 200px;
+        }
+        .wOSContainer{
+            @include flex();
+            align-items: flex-start;
+            .wOSCol-1{
+                @include dim(10%, 100%, 0, auto);
+                margin-top: 30px;
+                align-content: center;
+
+                svg{
+                    @include neo-unpressed-light();
+                    border: solid 5px $grey;    
+                    border-radius: 50%;
+                    transform: scale(1.3);
+                }
+            }
+            .wOSCol-2{
+                @include dim(40%, 100%, 0, auto);
+
+                .wOSPName{
+                    @include paragraphText($darkPink, 2rem, 2rem);
+                    font-weight: 800;
+                    padding: 10px;
+                }
+                .wOSPQualication{
+                    @include paragraphText($grey, 1.7rem, 2rem);
+                    font-weight: 600;
+                    padding:10px;
+                }
+                .wOSPComment{
+                    @include paragraphText($black, 1.7rem, 2rem);
+                    padding: 10px;
+                    letter-spacing: -0.3px;
+                }
+            }
+            .wOSCol-3{
+                @include dim(10%, 100%, 0, auto);
+                margin-top: 30px;
+                svg{
+                    @include neo-unpressed-light();
+                    margin: 60px;
+                    padding: 18px;
+                    transform: scale(1.5);
+                    border-radius: 4px;
+                    &:hover{
+                        cursor: pointer;
+                        @include neo-pressed-light();
+                    }
+                }
+            }
+        }
+            .seeMoreButton{
+                padding: 30px;
+                margin-top: 40px;
+                @include roundedButtonLight();
+            }
+    }
+}   
 
 #section-6{
-    @include dim(100%, 100%, 100vw, 100vh);
+    @include dim(100%, 100%, 100vw, 130vh);
+    @include flex(center, center ,center);
+
+    .tryCakeStudioDiv{
+        @include flex();
+        flex-flow: column wrap;
+
+        .tryCakeStudioHeading{
+            @include headingText(0, $grey);
+            flex: 1;
+            padding: 100px;
+        }
+        .tcsw{
+            @include flex();
+
+            .tryCakestudioContentDiv{
+                //flex
+            }
+            .tryCakeShakeArrow{
+                padding-top: 100px;
+                padding-left: 100px;
+            }
+        }
+    }
+}
+#section-7{
+    @include dim(100%, 100%, 100vw, 130vh);
+    @include flex(center,center ,center);
+    @include pinkGradient();
+
+    .faqContainer{
+        @include flex();
+        flex-flow: column wrap;
+        align-items: flex-start;
+
+        .faqHeading{
+            @include headingText(fit-content, $backgroundTheme);
+            padding-left: 40px;
+        }
+        .faqContent{
+            @include dim(50%, 50%, 0, auto);
+
+            .faqQuestionDiv{
+                padding: 40px;
+                
+                .faqQuestionText{
+                    @include paragraphText($backgroundTheme, 2rem, 2rem);
+                    padding-bottom: 20px;
+                    font-weight: 900;
+                }
+                .faqAnswerText{
+                    @include paragraphText($backgroundTheme, 1.7rem, 2rem);
+
+                }
+            }
+        }
+    }
+}
+#section-8{
+    @include dim(100%, 100%, 100vw, 150vh);
     @include flex(center,center ,center);
 
+    .contactDiv{
+        
+        .contactHeading{
+            @include headingText(0, $grey);
+        }
+        .contactForm{
+         
+            .contactform{
+                margin-top: 70px;
+                @include flex();
+                flex-flow: column wrap;
+                align-items: flex-start;
+                
+                .form-group{
+                    cursor: pointer;
+                    padding-top:20px;
+                    &:focus{
+                        border:none;
+                    }
+                    &::placeholder{
+                        opacity: 0.3;
+                        color: $lightPink;
+                    }
+                    label{
+                        color: $grey;
+                        font-weight: 600;
+                        font-size: 2.1rem;
+                        border:none;
+                        padding: 20px;
+                        padding-left: 3px;
+                        display: block;
+                        cursor: pointer;
+                    }
+                    input,textarea, select{
+                        padding: 15px;
+                        width:800px;
+                        margin-top:10px;
+                        border-radius: 10px;
+                        font-size: 1.7rem;
+                        border:none;
+                        background-color: $backgroundTheme;
+                        cursor: pointer;
+                        @include neo-pressed-light(1.2);
+                        &:focus{
+                            @include neo-unpressed-light(2);
+                            //border:$lightPink solid  !important;
+                            outline: none;
+                            
+                        }
+                    }
+                    .form-text{
+                        display:block;
+                        padding: 20px;
+                        padding-left: 10px;
+                        @include font($lightPink, 1.1rem, 600);
+                    }
+                }
+                .submitButton{
+                    @include roundedButtonLight();
+                }
+            }
+        }
+    }
+}
+#section-9{
+    @include dim(100%, 100%, 100vw, 100vh);
+    @include flex();
+    position: relative;
+
+    @mixin siteMapULItems() {
+        padding: 40px;
+        width:100%;
+        a{
+            @include paragraphText($grey, 2rem, 4.1rem);
+            @include transition(0.3s);
+        }
+        a:hover{
+            color: $lightPink;
+            font-size: 2.1rem;
+            @include transition(0.3s);
+        }
+    }
+        .siteMapContainer{
+            @include flex();
+            flex-flow: column wrap;
+            .siteMapHeading{
+                @include headingText(0, $grey);
+            }
+            .siteMapColDiv{
+                @include flex();
+                .siteMapCol-1{
+                    @include flex();
+        
+                    .siteMapUL-1{
+                        @include siteMapULItems();
+                    }
+                }
+                .siteMapCol-2{
+                    @include flex();
+        
+                    .siteMapUL-2{
+                        @include siteMapULItems();
+                    }
+                }
+                .siteMapCol-3{
+                    @include flex();
+                    flex-flow: column;
+        
+                    .SM-cakeShakelogo{
+                        cursor: pointer;
+                        padding-bottom: 20px;
+                    }
+                    .SM-qrCode{
+                        //@extend neo-unpressed-light();
+                        cursor: pointer;
+                        padding-top: 20px;
+                    }
+                }
+            }
+        }
+        .feedbackSmiley{
+            @include transition(0.3s);
+            transform: translateY(10px)scale(0.9);
+            cursor: pointer;
+            position: absolute;
+            //border: solid;
+            bottom: 0;
+            right: 200px;
+            &:hover{
+                @include transition(0.3s);
+                transform: scale(1) translateY(2px *1.2);
+            }
+        }
+        .cakeshakeLink{
+            @include flex();
+            @include siteMapULItems();
+            flex: 1;
+            height: 120px;
+            position: absolute;
+            bottom: 0;
+        }
 }
 
 //Expand Transition
@@ -395,13 +727,13 @@ li {
 
 .tooltip .tooltiptext {
   visibility: hidden;
-  max-width: 120px;
-  width: 100%;
+  min-width: 0px;
+  width: fit-content;
   background-color: black;
   color: #fff;
   text-align: center;
   border-radius: 6px;
-  padding: 5px 0;
+  padding: 25px;
   position: absolute;
   z-index: 1;
   top: -5px;
@@ -409,9 +741,10 @@ li {
   margin-top: 30px;
 
   height: 40px;
-  vertical-align: center;
   padding-top: 10px;
   font-size: 1.2rem;
+  font-weight: 600!important;
+  line-height: 1em;
 }
 
 .tooltip .tooltiptext::after {
