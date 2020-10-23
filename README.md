@@ -1,5 +1,5 @@
 # CakeShake
-CakeShake is a website made for cake lovers ❤.  
+CakeShake is a website made for cake lovers ❤  
 It will give them a real experience of buying their own customized cakes.  
 
 You can preview the website at __[CakeShake](https://srikant-code.github.io/CakeShake/index.html)__
@@ -27,9 +27,9 @@ You can start developing the front end changing the contents at
 ## Future Development
 
 * I will be making it responsive.
-* Will be adding interactivity (Javascript).
+* Will be adding interactivity(Javascript).
 * Plan to use react in the development.
-* Will be adding functionalities i.e connect backend services with the front end.
+* Will be adding functionalities i.e. connect backend services with the front end.
 * Will be adding payment options and developing CakeStudio.
 * Adding animations and illustrations.
 * And then Deploy it.
