@@ -28,8 +28,8 @@ You can start developing the front end changing the contents at
 
 * I will be making it responsive.
 * Will be adding interactivity(Javascript).
-* Plan to use react in the development.
-* Will be adding functionalities i.e. connect backend services with the front end.
-* Will be adding payment options and developing CakeStudio.
+* Planned to use react in the development.
+* I will be adding functionalities i.e. connect backend services with the front end.
+* I will be adding payment options and developing CakeStudio.
 * Adding animations and illustrations.
 * And then Deploy it.
