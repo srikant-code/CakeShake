@@ -7,7 +7,7 @@ It will give them a real experience of buying their own customized cakes.
 
 You can preview the website at __[CakeShake](https://srikant-code.github.io/CakeShake/index.html)__
 
-> __Note:__ It's in developmental stage. Read the warning carefully before visting the website.
+> __Note:__ It's in development. Read the warning carefully before visting the website.
 
 ## Warning!
 * **The current website is not suitable for mobile devices.**  
