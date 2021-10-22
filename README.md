@@ -1,4 +1,7 @@
-# CakeShake
+<h1 float="left">
+  <img src="https://scontent.fbbi5-1.fna.fbcdn.net/v/t1.6435-9/64905537_327972801465424_6096166091908710400_n.jpg?_nc_cat=105&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=xS2eMhoOQJsAX8b2sVT&_nc_ht=scontent.fbbi5-1.fna&oh=4d138dfc877909a5189c835e38249b6b&oe=6198E5F7" width="30" alt="logo_of_Cakeshake"> CakeShake
+</h1> 
+
 CakeShake is a website made for cake lovers ❤  
 It will give them a real experience of buying their own customized cakes.  
 
